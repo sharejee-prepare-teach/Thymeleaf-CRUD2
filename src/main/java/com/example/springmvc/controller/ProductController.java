@@ -24,6 +24,12 @@ public class ProductController {
         return "index";
     }
 
+    @RequestMapping(path = "/products", method = RequestMethod.GET)
+    public String getAllProducts(Model model) {
+        model.addAttribute("products", productRepository.findAll());
+        return "products";
+    }
+
     @RequestMapping(path = "/products/add", method = RequestMethod.GET)
     public String createProduct(Model model) {
         model.addAttribute("product", new Product());
@@ -34,12 +40,6 @@ public class ProductController {
     public String saveProduct(Product product) {
         productRepository.save(product);
         return "redirect:/";
-    }
-
-    @RequestMapping(path = "/products", method = RequestMethod.GET)
-    public String getAllProducts(Model model) {
-        model.addAttribute("products", productRepository.findAll());
-        return "products";
     }
 
     @RequestMapping(path = "/products/edit/{id}", method = RequestMethod.GET)
