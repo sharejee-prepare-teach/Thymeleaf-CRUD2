@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    password: 1
+    url: jdbc:postgresql://localhost:5433/thymleaf-crud2
+    username: postgres
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+
+
