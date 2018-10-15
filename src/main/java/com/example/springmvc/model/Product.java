@@ -1,19 +1,15 @@
 package com.example.springmvc.model;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.GenericGenerators;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "product")
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "name")
     private String name;
     private String description;
     private String type;

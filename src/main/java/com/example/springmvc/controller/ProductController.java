@@ -2,7 +2,9 @@ package com.example.springmvc.controller;
 
 import com.example.springmvc.model.Product;
 import com.example.springmvc.repository.ProductRepository;
+import com.example.springmvc.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,16 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class ProductController {
 
+    @Autowired
     private ProductRepository productRepository;
 
     @Autowired
-    public void setProductRepository(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+    private ProductService perProductService;
+
 
     @RequestMapping(path = "/")
     public String index() {
@@ -56,4 +59,12 @@ public class ProductController {
         productRepository.delete(id);
         return "redirect:/products";
     }
+
+    @RequestMapping(value = "/products/search/{name}", method = RequestMethod.GET)
+    public String getNameProduct(@PathVariable("name") String name) {
+        List<Product> perProduct = perProductService.findByName(name);
+        System.out.println("Product: "+perProduct);
+        return "redirect:/products";
+    }
+
 }
