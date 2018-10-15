@@ -60,11 +60,18 @@ public class ProductController {
         return "redirect:/products";
     }
 
-    @RequestMapping(value = "/products/search/{name}", method = RequestMethod.GET)
-    public String getNameProduct(@PathVariable("name") String name) {
-        List<Product> perProduct = perProductService.findByName(name);
-        System.out.println("Product: "+perProduct);
+    @RequestMapping(path = "/products/search",method = RequestMethod.POST)
+    public String getNameProduct(Model model,Product product) {
+        List<Product> perProduct = perProductService.findByName(product.getName());
+        System.out.println("Product: " + perProduct);
+        model.addAttribute("products", perProduct);
         return "redirect:/products";
+    }
+
+    @RequestMapping(path = "/products/search", method = RequestMethod.GET)
+    public String searchProduct(Model model) {
+        model.addAttribute("product", new Product());
+        return "search";
     }
 
 }
