@@ -65,7 +65,7 @@ public class ProductController {
         List<Product> perProduct = perProductService.findByName(product.getName());
         System.out.println("Product: " + perProduct);
         model.addAttribute("products", perProduct);
-        return "redirect:/products";
+        return "products";
     }
 
     @RequestMapping(path = "/products/search", method = RequestMethod.GET)
